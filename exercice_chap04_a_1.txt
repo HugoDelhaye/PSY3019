@@ -1,0 +1,4 @@
+fruits = ['banana','poire','mango','prune','orange','mandarines','pêche',]
+
+for i in range(0, len(fruits)):
+    print(len(fruits[i]))
