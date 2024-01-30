@@ -1,11 +1,14 @@
 #PSEUDO CODE:
 
-# On importe les librairies
-# On créer le DataFrame comtenant toutes les données
-# On créer un DataFrame avec seulment les données qui nous intéressent 
-# On tranforme ces données en array pour plus facilement les manipuler
-# On créer une nouvelle colonne et on l'ajoute à l'array
+'''
+
+On importe des données d'interet sous forme de DataFrame pandas et de Array numpy. Puis nous créons une nouvelle
+colonne représentant la moyenne des volumes des striatum droit et gauche pour chaque participants, cette colonne
+est ajoutée dans l'Array. Pour finir nous reformatons le DataFrame grâce à groupby().
+
 # On modifie l'organisation des données dans le deuxième DataFrame grâce à la fonction groupby()
+
+'''
 
 ########
 
