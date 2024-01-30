@@ -18,9 +18,10 @@ print(df.columns)
 
 # selction des colonnes d'intéret
 df2 = df[['l_striatum', 'r_striatum', 'stai', 'duration', 'gds']]
-df2.replace('.', np.nan)
+df3 = df2.replace('.', np.nan)
 
-arr = df2.to_numpy(dtype = np.float64)
+
+arr = df3.to_numpy(dtype = np.float64)
 
 # the average volum from striatum of both side
 striatum_mean = ((arr[:, 0]+ arr[:, 1])/2).reshape([883, 1])
@@ -29,4 +30,4 @@ striatum_mean = ((arr[:, 0]+ arr[:, 1])/2).reshape([883, 1])
 arr2 = np.concatenate([arr, striatum_mean], axis=1)
 
 by = 'gds'
-df2.groupby(by)
+df3.groupby(by)
