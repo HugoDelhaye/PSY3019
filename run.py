@@ -6,8 +6,6 @@ On importe des données d'interet sous forme de DataFrame pandas et de Array num
 colonne représentant la moyenne des volumes des striatum droit et gauche pour chaque participants, cette colonne
 est ajoutée dans l'Array. Pour finir nous reformatons le DataFrame grâce à groupby().
 
-# On modifie l'organisation des données dans le deuxième DataFrame grâce à la fonction groupby()
-
 '''
 
 ########
