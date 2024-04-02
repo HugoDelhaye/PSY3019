@@ -15,7 +15,7 @@ plt.close()
 
 # sauvegarder la figure
 fig = plt.figure() # pour sauvegarder, il faut créer une figure
-fig.savefig(os.path.join(chemin, 'FigureHugo.png')
+fig.savefig(os.path.join(chemin, 'FigureHugo.png'))
 
 # importer mon cadre de données
 data = 'HugoDelhaye_psy6973_data_20240116.csv'
