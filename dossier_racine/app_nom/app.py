@@ -1,12 +1,15 @@
 #Ici ce trouve mon app
 # c'est le fichier principal qui va être lu
-from bin.fonction_anonyme import data_load
+import os
+from bin.fichier import Pipeline
+
+head_path = os.path.dirname(os.path.abspath(__file__))
+print(head_path)
+p = Pipeline(head_path)
+p.clean_data(p.data)
+p.data_augmentation(p.data)
 
 
-def head_path():
-	head_path = os.path.dirname(os.path.abspath(__file__))
-	return head_path
+df = p.data
 
-df = data_load(head_path)
-
-print(df)
+print(df.head())
