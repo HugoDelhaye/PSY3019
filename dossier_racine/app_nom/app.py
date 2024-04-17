@@ -36,21 +36,21 @@ print(testt3.statistic, testt3.pvalue)
 # graphique pour les stats (statsmodels, SciPy) présent
 
 # Les femmes sont moins dépressives que les hommes.
-plt.hist([gdsF, gdsM], label=["Gds des Femmes", "Gds des Hommes"])
+#plt.hist([gdsF, gdsM], label=["Gds des Femmes", "Gds des Hommes"])
 plt.xlabel("Score gds")
 plt.ylabel("Fréquence")
 plt.legend()
-plt.show()
+#plt.show()
 plt.close()
 
 # Plus le striatum est grand, moins il y a de syndromes physiologiques
-sns.regplot(df, x='striatum_mean', hue='physio', marker = "+")
-plt.show()
+#sns.regplot(df, x='striatum_mean', y='physio', marker = "+")
+#plt.show()
 plt.close()
 
 # Plus les premiers syndromes se manifestent tôt, moins les syndromes moteurs sont graves
-sns.regplot(df, x='ageonset', hue='physio', marker = "+")
-plt.show()
+#sns.regplot(df, x='ageonset', y='physio', marker = "+")
+#plt.show()
 plt.close()
 
 ####### entrainement des modèles
@@ -59,23 +59,62 @@ plt.close()
 
 drop_out = np.where(df['striatum_mean'].isna() == True)
 
+X_AA_sup = np.delete(df['striatum_mean'].values, drop_out, axis=0)
+y_AA_sup = np.delete(df['moca_cat'].values, drop_out, axis=0)
+
+X_AA_sup = np.ravel(X_AA_sup)
+y_AA_sup = np.ravel(y_AA_sup)
+
+# sépare gds du reste
+X_AA_non_sup = df.drop('gds', axis=1)
+y_AA_non_sup = df.gds
+
+drop_out = np.where(df['striatum_mean'].isna() == True)
+
 X_AA_non_sup = np.delete(df['striatum_mean'].values, drop_out, axis=0)
 y_AA_non_sup = np.delete(df['moca_cat'].values, drop_out, axis=0)
 
-xtest = X_AA_non_sup.reshape(-1, 1)
-ytest = y_AA_non_sup.reshape(-1, 1)
+X_AA_non_sup = np.ravel(X_AA_sup).reshape(-1, 1)
+y_AA_non_sup = np.ravel(y_AA_sup)
 
-# sépare le scrore de depression du reste
-X_AA_sup = df.drop('', axis=1)
-X_AA_sup = df.
 
-# code svm implementé
+# entrainment des modeles
+model1 = SVC(kernel='linear', C=1)
 
-model = SVC(kernel='linear', C=1)
-model.fit(X_AA_non_sup.reshape(-1, 1), y_AA_non_sup)
+#code pour la validation croisée est utilisé
+scores1 = cross_val_score(model1, X_AA_sup.reshape(-1, 1), y_AA_sup, cv=10)
 
-# cross validation du svm 
+# Fit the model
+model1.fit(X_AA_sup.reshape(-1, 1), y_AA_sup)
 
+# Make predictions
+predictions1 = model1.predict(X_AA_sup.reshape(-1, 1))
+
+# Create confusion matrix
+confusion_matrix1 = confusion_matrix(y_AA_sup, predictions1)
+sns.heatmap(confusion_matrix1.T, square=True, annot=True, fmt='d', cbar=False)
+plt.show()
+plt.close()
+
+# code pour le formatage des chaînes est utilisé
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores1.mean(), scores1.std() * 2))
+
+model2 = KMeans(n_clusters=10)
+
+#code pour la validation croisée est utilisé
+scores2 = cross_val_predict(model2, X_AA_non_sup, y_AA_non_sup, cv=10)
+
+# Fit the model
+model2.fit(X_AA_non_sup.reshape(-1, 1), y_AA_non_sup)
+
+# Make predictions
+predictions2 = model2.predict(X_AA_non_sup.reshape(-1, 1))
+
+# Create confusion matrix
+confusion_matrix2 = confusion_matrix(y_AA_non_sup, predictions2)
+sns.heatmap(confusion_matrix2.T, square=True, annot=True, fmt='d', cbar=False)
+plt.show()
+plt.close()
 
 # code k-moyennes implementé
 
