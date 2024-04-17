@@ -40,17 +40,17 @@ plt.hist([gdsF, gdsM], label=["Gds des Femmes", "Gds des Hommes"])
 plt.xlabel("Score gds")
 plt.ylabel("Fréquence")
 plt.legend()
-#plt.show()
+plt.show()
 plt.close()
 
 # Plus le striatum est grand, moins il y a de syndromes physiologiques
 sns.regplot(df, x='striatum_mean', y='physio', marker = "+")
-#plt.show()
+plt.show()
 plt.close()
 
 # Plus les premiers syndromes se manifestent tôt, moins les syndromes moteurs sont graves
 sns.regplot(df, x='ageonset', y='physio', marker = "+")
-#plt.show()
+plt.show()
 plt.close()
 
 ####### entrainement des modèles
@@ -115,8 +115,3 @@ confusion_matrix2 = confusion_matrix(y_AA_non_sup, predictions2)
 sns.heatmap(confusion_matrix2.T, square=True, annot=True, fmt='d', cbar=False)
 plt.show()
 plt.close()
-
-# code k-moyennes implementé
-
-model = KMeans(n_clusters=2)
-model.fit(X.reshape(-1, 1))
