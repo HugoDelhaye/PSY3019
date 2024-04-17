@@ -61,3 +61,4 @@ class GetDataToAnalyze:
 			return []
 		else:
 			return [list1[0] + list2[0]] + self.fonction_recursive(list1[1:], list2[1:])
+
