@@ -8,6 +8,7 @@ from statsmodels.formula.api import ols
 from scipy import stats
 from sklearn.cluster import KMeans
 from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 from bin.fichier import GetDataToAnalyze
 
@@ -102,7 +103,7 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (scores1.mean(), scores1.std() * 2))
 model2 = KMeans(n_clusters=10)
 
 #code pour la validation croisée est utilisé
-scores2 = cross_val_predict(model2, X_AA_non_sup, y_AA_non_sup, cv=10)
+scores2 = cross_val_score(model2, X_AA_non_sup, y_AA_non_sup, cv=10)
 
 # Fit the model
 model2.fit(X_AA_non_sup.reshape(-1, 1), y_AA_non_sup)
