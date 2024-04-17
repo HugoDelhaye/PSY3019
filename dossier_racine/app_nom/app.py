@@ -36,7 +36,7 @@ print(testt3.statistic, testt3.pvalue)
 # graphique pour les stats (statsmodels, SciPy) présent
 
 # Les femmes sont moins dépressives que les hommes.
-#plt.hist([gdsF, gdsM], label=["Gds des Femmes", "Gds des Hommes"])
+plt.hist([gdsF, gdsM], label=["Gds des Femmes", "Gds des Hommes"])
 plt.xlabel("Score gds")
 plt.ylabel("Fréquence")
 plt.legend()
@@ -44,12 +44,12 @@ plt.legend()
 plt.close()
 
 # Plus le striatum est grand, moins il y a de syndromes physiologiques
-#sns.regplot(df, x='striatum_mean', y='physio', marker = "+")
+sns.regplot(df, x='striatum_mean', y='physio', marker = "+")
 #plt.show()
 plt.close()
 
 # Plus les premiers syndromes se manifestent tôt, moins les syndromes moteurs sont graves
-#sns.regplot(df, x='ageonset', y='physio', marker = "+")
+sns.regplot(df, x='ageonset', y='physio', marker = "+")
 #plt.show()
 plt.close()
 
