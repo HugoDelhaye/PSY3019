@@ -9,6 +9,7 @@ from scipy import stats
 from sklearn.cluster import KMeans
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from bin.fichier import GetDataToAnalyze
 
